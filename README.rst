@@ -23,6 +23,7 @@ Controll mopidy without screen using GPIO and TTS
 It currently only says the song that is playing.
 
 For example if you play "Rather Be - Clea Bandit" you will hear:
+
 http://translate.google.com/translate_tts?tl=en&q=rather%20be%20by%20clean%20bandit
 
 TTS (Text To Speech) is used from google translate (It is not documented but it works).
@@ -38,7 +39,9 @@ Installation
 Not released. You can check the development (unstable):
 
     git clone https://github.com/9and3r/mopidy-ttsgpio/
+    
     cd mopidy-ttsgpio
+    
     sudo python setup.py develop
 
 
