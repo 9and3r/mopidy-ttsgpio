@@ -20,9 +20,7 @@ Mopidy-TtsGpio
 
 Controll mopidy without screen using GPIO and TTS
 
-It currently only says the song that is playing.
-
-For example if you play "Rather Be - Clea Bandit" you will hear:
+For example if you play "Rather Be - Clean Bandit" you will hear:
 
 http://translate.google.com/translate_tts?tl=en&q=rather%20be%20by%20clean%20bandit
 
@@ -30,21 +28,27 @@ TTS (Text To Speech) is used from google translate (It is not documented but it 
 
 The idea is to develop with GPIO buttons something similar to `3rd generation Ipod shuffle control <http://youtu.be/TfZUcL700wQ?t=2m40s>`_
 
+Features
+========
 
+ - Play/Pasue
+ - Next/Previous track
+ - Select playlist
+ - Hear the song name (Text To Speech)
+ - Exit mopidy
+ - Shutdown
+ - Restart
 
 
 Installation
 ============
 
-Not released. You can check the development (unstable):
+Not released. You can check the development (unstable)::
 
     git clone https://github.com/9and3r/mopidy-ttsgpio/
-    
     cd mopidy-ttsgpio
-    
     sudo python setup.py develop
-
-
+    
 Currently not available in pipy
 
 Install by running::
@@ -60,8 +64,29 @@ Before starting Mopidy, you must add configuration for
 Mopidy-TtsGpio to your Mopidy configuration file::
 
     [ttsgpio]
-    # TODO: Add example of extension config
+    debug_gpio_simulate = false # Set true to emulate GPIO buttons with on screen buttons
+    pin_button_main = 17
+    pin_button_next = 22
+    pin_button_previous = 23
+    pin_button_vol_up = 24
+    pin_button_vol_down = 25
+    
+You can set the pins you would like to use. The numbers are in BCM mode. You can check `here <http://raspberrypi.stackexchange.com/a/12967>`_ to see the numbers for your board.
+The buttons must be connected to GROUND.
 
+Example:
+
+[pin 17] - [Button] - [Ground]
+
+Controls
+========
+
+- main: play/pause. In menu select item
+- main longpress: enter/exit menu
+- vol_up longpress: repeat last sentence
+- vol_down longpress: set the volume 0
+- next: in menu navigate to next item
+- previous: in menu navigate to next item
 
 Project resources
 =================
