@@ -5,6 +5,7 @@ import time
 logger = logging.getLogger(__name__)
 longpress_time = 0.3
 
+
 class GPIOManager():
 
     def __init__(self, frontend, pins):
@@ -22,28 +23,28 @@ class GPIOManager():
         GPIO.setmode(GPIO.BCM)
 
         # Next Button
-        GPIO.setup(pins['next'], GPIO.IN, pull_up_down=GPIO.PUD_UP)
-        GPIO.add_event_detect(pins['next'], GPIO.BOTH, callback=self.next,
+        GPIO.setup(pins['pin_button_next'], GPIO.IN, pull_up_down=GPIO.PUD_UP)
+        GPIO.add_event_detect(pins['pin_button_next'], GPIO.BOTH, callback=self.next,
                               bouncetime=30)
 
         # Previous Button
-        GPIO.setup(pins['previous'], GPIO.IN, pull_up_down=GPIO.PUD_UP)
-        GPIO.add_event_detect(pins['previous'], GPIO.BOTH,
+        GPIO.setup(pins['pin_button_previous'], GPIO.IN, pull_up_down=GPIO.PUD_UP)
+        GPIO.add_event_detect(pins['pin_button_previous'], GPIO.BOTH,
                               callback=self.previous, bouncetime=30)
 
         # Volume Up Button
-        GPIO.setup(pins['vol_up'], GPIO.IN, pull_up_down=GPIO.PUD_UP)
-        GPIO.add_event_detect(pins['vol_up'], GPIO.BOTH, callback=self.vol_up,
+        GPIO.setup(pins['pin_button_vol_up'], GPIO.IN, pull_up_down=GPIO.PUD_UP)
+        GPIO.add_event_detect(pins['pin_button_vol_up'], GPIO.BOTH, callback=self.vol_up,
                               bouncetime=30)
 
         # Volume Down Button
-        GPIO.setup(pins['vol_down'], GPIO.IN, pull_up_down=GPIO.PUD_UP)
-        GPIO.add_event_detect(pins['vol_down'], GPIO.BOTH,
+        GPIO.setup(pins['pin_button_vol_down'], GPIO.IN, pull_up_down=GPIO.PUD_UP)
+        GPIO.add_event_detect(pins['pin_button_vol_down'], GPIO.BOTH,
                               callback=self.vol_down, bouncetime=30)
 
         # Main Button
-        GPIO.setup(pins['main'], GPIO.IN, pull_up_down=GPIO.PUD_UP)
-        GPIO.add_event_detect(pins['main'], GPIO.BOTH,
+        GPIO.setup(pins['pin_button_main'], GPIO.IN, pull_up_down=GPIO.PUD_UP)
+        GPIO.add_event_detect(pins['pin_button_main'], GPIO.BOTH,
                               callback=self.main, bouncetime=30)
 
     def previous(self, channel):
@@ -76,17 +77,17 @@ class GPIOManager():
     def vol_up(self, channel):
         if GPIO.input(channel) == 1:
             if self.down_time_vol_up + longpress_time > time.time():
-                self.frontend.input({'key': 'vol_up', 'long': False})
+                self.frontend.input({'key': 'volume_up', 'long': False})
             else:
-                self.frontend.input({'key': 'vol_up', 'long': True})
+                self.frontend.input({'key': 'volume_up', 'long': True})
         else:
             self.down_time_vol_up = time.time()
 
     def vol_down(self, channel):
         if GPIO.input(channel) == 1:
             if self.down_time_vol_down + longpress_time > time.time():
-                self.frontend.input({'key': 'vol_down', 'long': False})
+                self.frontend.input({'key': 'volume_down', 'long': False})
             else:
-                self.frontend.input({'key': 'vol_down', 'long': True})
+                self.frontend.input({'key': 'volume_down', 'long': True})
         else:
             self.down_time_vol_down = time.time()

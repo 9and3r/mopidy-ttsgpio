@@ -28,7 +28,7 @@ class TtsGpio(pykka.ThreadingActor, core.CoreListener):
             self.simulator = GpioSimulator(self)
         else:
             from .gpio_input_manager import GPIOManager
-            self.gpio_manager = GPIOManager(self, config['pins'])
+            self.gpio_manager = GPIOManager(self, config['ttsgpio'])
 
     def track_playback_started(self, tl_track):
         self.speak_current_song(tl_track)
@@ -48,7 +48,8 @@ class TtsGpio(pykka.ThreadingActor, core.CoreListener):
                 else:
                     current = self.core.playback.volume.get()
                     current += 10
-                    self.backend.tell({'action': 'set_volume', 'value': current})
+                    self.backend.tell({'action': 'set_volume',
+                                       'value': current})
             elif input_event['key'] == 'volume_down':
                 if input_event['long']:
                     current = 0
@@ -56,7 +57,8 @@ class TtsGpio(pykka.ThreadingActor, core.CoreListener):
                     current = self.core.playback.volume.get()
                     current -= 10
                 self.backend.tell({'action': 'set_volume', 'value': current})
-            elif input_event['key'] == 'main' and input_event['long'] and self.menu:
+            elif input_event['key'] == 'main' and input_event['long'] \
+                    and self.menu:
                 self.exit_menu()
             else:
                 if self.menu:
@@ -68,16 +70,17 @@ class TtsGpio(pykka.ThreadingActor, core.CoreListener):
             traceback.print_exc()
 
     def manage_input(self, input_event):
-        if input_event['key'] == 'down':
+        if input_event['key'] == 'next':
             self.core.playback.next()
-        elif input_event['key'] == 'up':
+        elif input_event['key'] == 'previous':
             self.core.playback.previous()
         elif input_event['key'] == 'main':
             if input_event['long']:
                 self.menu = True
                 self.main_menu.reset()
             else:
-                if self.core.playback.state.get() == mopidy.core.PlaybackState.PLAYING:
+                if self.core.playback.state.get() == \
+                        mopidy.core.PlaybackState.PLAYING:
                     self.core.playback.pause()
                 else:
                     self.core.playback.play()

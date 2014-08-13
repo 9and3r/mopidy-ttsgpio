@@ -23,9 +23,9 @@ class MainMenu():
 
     def input(self, input_event):
         if self.main_menu:
-            if input_event['key'] == 'down':
+            if input_event['key'] == 'next':
                 self.change_current(1)
-            elif input_event['key'] == 'up':
+            elif input_event['key'] == 'previous':
                 self.change_current(-1)
             elif input_event['key'] == 'main':
                 if isinstance(self.elements[self.current], str):
