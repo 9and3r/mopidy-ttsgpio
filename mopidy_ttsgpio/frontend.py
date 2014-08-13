@@ -1,8 +1,7 @@
 import logging
 import traceback
-
-import mopidy
 import pykka
+
 from mopidy import core
 
 from .main_menu import MainMenu
@@ -35,7 +34,7 @@ class TtsGpio(pykka.ThreadingActor, core.CoreListener):
 
     def playback_state_changed(self, old_state, new_state):
         if self.debug_gpio_simulate:
-            if new_state == mopidy.core.PlaybackState.PLAYING:
+            if new_state == core.PlaybackState.PLAYING:
                 self.simulator.playing_led.select()
             else:
                 self.simulator.playing_led.deselect()
@@ -80,7 +79,7 @@ class TtsGpio(pykka.ThreadingActor, core.CoreListener):
                 self.main_menu.reset()
             else:
                 if self.core.playback.state.get() == \
-                        mopidy.core.PlaybackState.PLAYING:
+                        core.PlaybackState.PLAYING:
                     self.core.playback.pause()
                 else:
                     self.core.playback.play()

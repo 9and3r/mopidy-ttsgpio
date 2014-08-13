@@ -3,6 +3,7 @@ from Tkinter import Button, Checkbutton, DISABLED, E, N, S, Tk, W
 
 
 class GpioSimulator():
+    
     def __init__(self, frontend):
         self.frontend = frontend
         self.playing_led = None

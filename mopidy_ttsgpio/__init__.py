@@ -1,13 +1,10 @@
 from __future__ import unicode_literals
 import logging
 import os
-import pygst
-
-
-pygst.require('0.10')
-
 
 from mopidy import config, ext
+import pygst
+pygst.require('0.10')
 
 
 __version__ = '0.1.0'

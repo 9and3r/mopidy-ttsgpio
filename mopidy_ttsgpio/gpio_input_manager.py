@@ -25,21 +25,24 @@ class GPIOManager():
 
         # Next Button
         GPIO.setup(pins['pin_button_next'], GPIO.IN, pull_up_down=GPIO.PUD_UP)
-        GPIO.add_event_detect(pins['pin_button_next'], GPIO.BOTH, callback=self.next,
-                              bouncetime=30)
+        GPIO.add_event_detect(pins['pin_button_next'],
+                              GPIO.BOTH, callback=self.next, bouncetime=30)
 
         # Previous Button
-        GPIO.setup(pins['pin_button_previous'], GPIO.IN, pull_up_down=GPIO.PUD_UP)
+        GPIO.setup(pins['pin_button_previous'], GPIO.IN,
+                   pull_up_down=GPIO.PUD_UP)
         GPIO.add_event_detect(pins['pin_button_previous'], GPIO.BOTH,
                               callback=self.previous, bouncetime=30)
 
         # Volume Up Button
-        GPIO.setup(pins['pin_button_vol_up'], GPIO.IN, pull_up_down=GPIO.PUD_UP)
-        GPIO.add_event_detect(pins['pin_button_vol_up'], GPIO.BOTH, callback=self.vol_up,
-                              bouncetime=30)
+        GPIO.setup(pins['pin_button_vol_up'], GPIO.IN,
+                   pull_up_down=GPIO.PUD_UP)
+        GPIO.add_event_detect(pins['pin_button_vol_up'], GPIO.BOTH,
+                              callback=self.vol_up, bouncetime=30)
 
         # Volume Down Button
-        GPIO.setup(pins['pin_button_vol_down'], GPIO.IN, pull_up_down=GPIO.PUD_UP)
+        GPIO.setup(pins['pin_button_vol_down'], GPIO.IN,
+                   pull_up_down=GPIO.PUD_UP)
         GPIO.add_event_detect(pins['pin_button_vol_down'], GPIO.BOTH,
                               callback=self.vol_down, bouncetime=30)
 

@@ -20,3 +20,10 @@ script:
 after_success:
   - "if [ $TOX_ENV == 'py27' ]; then pip install coveralls; coveralls; fi"
 
+notifications:
+  email:
+    recipients:
+      - 9and3r@gmail.com
+    on_success: change
+    on_failure: change
+
