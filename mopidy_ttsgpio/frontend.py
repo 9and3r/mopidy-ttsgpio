@@ -99,6 +99,7 @@ class TtsGpio(pykka.ThreadingActor, core.CoreListener):
             self.tts.speak_text(tl_track.track.name + ' by ' + artists)
 
     def exit_menu(self):
+        logger.error("menutik irten naiz")
         self.menu = False
 
     def playlists_loaded(self):

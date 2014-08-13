@@ -12,9 +12,9 @@ class GpioSimulator():
     def initial_simulator(self):
         root = Tk()
         root.title("GPIO Simulator")
-        previous = Button(root, text="Previous", command=self.up)
+        previous = Button(root, text="Previous", command=self.previous)
         main = Button(root, text="Main button", command=self.main)
-        next = Button(root, text="Next", command=self.down)
+        next = Button(root, text="Next", command=self.next)
         vol_up = Button(root, text="Vol +", command=self.vol_up)
         vol_up_long = Button(root, text="Vol + long", command=self.vol_up_long)
         vol_down = Button(root, text="Vol -", command=self.vol_down)
@@ -35,8 +35,8 @@ class GpioSimulator():
 
         root.mainloop()
 
-    def up(self):
-        self.frontend.input({'key': 'up', 'long': False})
+    def previous(self):
+        self.frontend.input({'key': 'previous', 'long': False})
 
     def main(self):
         self.frontend.input({'key': 'main', 'long': False})
@@ -44,8 +44,8 @@ class GpioSimulator():
     def main_long(self):
         self.frontend.input({'key': 'main', 'long': True})
 
-    def down(self):
-        self.frontend.input({'key': 'down', 'long': False})
+    def next(self):
+        self.frontend.input({'key': 'next', 'long': False})
 
     def vol_up(self):
         self.frontend.input({'key': 'volume_up', 'long': False})

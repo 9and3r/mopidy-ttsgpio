@@ -29,6 +29,11 @@ class Extension(ext.Extension):
     def get_config_schema(self):
         schema = super(Extension, self).get_config_schema()
         schema['debug_gpio_simulate'] = config.Boolean()
+        schema['pin_button_main'] = config.Integer()
+        schema['pin_button_next'] = config.Integer()
+        schema['pin_button_previous'] = config.Integer()
+        schema['pin_button_vol_up'] = config.Integer()
+        schema['pin_button_vol_down'] = config.Integer()
         return schema
 
     def setup(self, registry):

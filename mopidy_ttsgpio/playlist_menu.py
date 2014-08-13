@@ -39,9 +39,9 @@ class PlaylistMenu():
         self.speak_current()
 
     def input(self, input_event):
-        if input_event['key'] == 'down':
+        if input_event['key'] == 'previous':
             self.change_current(1)
-        elif input_event['key'] == 'up':
+        elif input_event['key'] == 'next':
             self.change_current(-1)
         elif input_event['key'] == 'main':
             core = self.frontend.core
