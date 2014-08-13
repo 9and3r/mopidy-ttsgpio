@@ -1,5 +1,5 @@
 from threading import Thread
-from Tkinter import Button, Checkbutton, Tk, E, DISABLED, N, S, W
+from Tkinter import Button, Checkbutton, DISABLED
 
 
 class GpioSimulator():
@@ -23,15 +23,15 @@ class GpioSimulator():
         main_long = Button(root, text="Main long", command=self.main_long)
         self.playing_led = Checkbutton(text="playing_led", state=DISABLED)
 
-        vol_up.grid(row=0, column=1, sticky=W + E + N + S)
-        vol_up_long.grid(row=0, column=2, sticky=W + E + N + S)
-        previous.grid(row=1, column=0, sticky=W + E + N + S)
-        main.grid(row=1, column=1, sticky=W + E + N + S)
-        main_long.grid(row=1, column=2, sticky=W + E + N + S)
-        next.grid(row=1, column=3, sticky=W + E + N + S)
-        vol_down.grid(row=2, column=1, sticky=W + E + N + S)
-        vol_down_long.grid(row=2, column=2, sticky=W + E + N + S)
-        self.playing_led.grid(row=3, column=1, sticky=W + E + N + S)
+        vol_up.grid(row=0, column=1)
+        vol_up_long.grid(row=0, column=2)
+        previous.grid(row=1, column=0)
+        main.grid(row=1, column=1)
+        main_long.grid(row=1, column=2)
+        next.grid(row=1, column=3)
+        vol_down.grid(row=2, column=1)
+        vol_down_long.grid(row=2, column=2)
+        self.playing_led.grid(row=3, column=1)
 
         root.mainloop()
 

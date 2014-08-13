@@ -1,6 +1,6 @@
-import pykka
-
 from mopidy import backend
+
+import pykka
 
 
 class TtsGpioBackend(pykka.ThreadingActor, backend.Backend):
