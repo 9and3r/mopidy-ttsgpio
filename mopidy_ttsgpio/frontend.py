@@ -69,7 +69,6 @@ class TtsGpio(pykka.ThreadingActor, core.CoreListener):
             if input_event['long']:
                 self.menu = True
                 self.main_menu.reset()
-                logger.error("menuan nao")
             else:
                 if self.core.playback.state.get() == mopidy.core.PlaybackState.PLAYING:
                     self.core.playback.pause()

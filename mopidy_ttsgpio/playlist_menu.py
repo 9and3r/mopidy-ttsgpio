@@ -44,15 +44,11 @@ class PlaylistMenu():
         elif input_event['key'] == 'up':
             self.change_current(-1)
         elif input_event['key'] == 'main':
-            self.frontend.core.tracklist.clear()
-            self.frontend.core.tracklist.add(uri=self.playlists[self.selected].uri)
-            self.frontend.core.playback.play()
+            core = self.frontend.core
+            core.tracklist.clear()
+            core.tracklist.add(uri=self.playlists[self.selected].uri)
+            core.playback.play()
             self.frontend.exit_menu()
 
     def repeat(self):
         self.speak_current()
-
-
-
-
-

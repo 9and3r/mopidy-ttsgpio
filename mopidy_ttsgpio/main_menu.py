@@ -5,12 +5,16 @@ import mopidy
 
 from .playlist_menu import PlaylistMenu
 
+
 class MainMenu():
     def __init__(self, frontend):
         self.current = 0
         self.fronted = frontend
         self.main_menu = False
-        self.elements = [PlaylistMenu(frontend), 'exit mopidy', 'shutdown', 'reset', 'check ip']
+        self.elements = [PlaylistMenu(frontend), 'exit mopidy']
+        self.elements.append('shutdown')
+        self.elements.append('reset')
+        self.elements.append('check ip')
 
     def reset(self):
         self.current = 0
