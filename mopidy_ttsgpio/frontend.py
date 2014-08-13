@@ -1,8 +1,8 @@
 import logging
 import traceback
-import pykka
 
 from mopidy import core
+import pykka
 
 from .main_menu import MainMenu
 from .tts import TTS

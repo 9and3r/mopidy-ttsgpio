@@ -1,9 +1,8 @@
 from threading import Thread
-from Tkinter import Button, Checkbutton, DISABLED, E, N, S, Tk, W
+from Tkinter import *
 
 
 class GpioSimulator():
-    
     def __init__(self, frontend):
         self.frontend = frontend
         self.playing_led = None
