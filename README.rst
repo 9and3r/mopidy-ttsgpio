@@ -31,13 +31,13 @@ The idea is to develop with GPIO buttons something similar to `3rd generation Ip
 Features
 ========
 
- - Play/Pasue
- - Next/Previous track
- - Select playlist
- - Hear the song name (Text To Speech)
- - Exit mopidy
- - Shutdown
- - Restart
+- Play/Pasue
+- Next/Previous track
+- Select playlist
+- Hear the song name (Text To Speech)
+- Exit mopidy
+- Shutdown
+- Restart
 
 
 Installation
