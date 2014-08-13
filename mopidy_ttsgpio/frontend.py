@@ -1,12 +1,12 @@
 import logging
-import pykka
 import traceback
-from mopidy import core
+
 import mopidy
+import pykka
+from mopidy import core
 
 from .main_menu import MainMenu
 from .tts import TTS
-
 
 logger = logging.getLogger(__name__)
 
@@ -15,7 +15,7 @@ class TtsGpio(pykka.ThreadingActor, core.CoreListener):
 
     def __init__(self, config, core):
         super(TtsGpio, self).__init__()
-        self.tts = TTS()
+        self.tts = TTS(self)
         self.menu = False
         self.backend = \
             pykka.ActorRegistry.get_by_class_name("TtsGpioBackend")[0]
@@ -99,10 +99,7 @@ class TtsGpio(pykka.ThreadingActor, core.CoreListener):
             self.tts.speak_text(tl_track.track.name + ' by ' + artists)
 
     def exit_menu(self):
-        logger.error("menutik irten naiz")
         self.menu = False
 
     def playlists_loaded(self):
         self.main_menu.elements[0].reload_playlists()
-
-

@@ -2,7 +2,8 @@ from __future__ import unicode_literals
 
 import unittest
 
-from mopidy_ttsgpio import Extension, frontend as frontend_lib
+from mopidy_ttsgpio import frontend as frontend_lib
+from mopidy_ttsgpio import Extension
 
 
 class ExtensionTest(unittest.TestCase):

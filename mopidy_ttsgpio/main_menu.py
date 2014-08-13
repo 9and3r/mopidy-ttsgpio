@@ -73,4 +73,3 @@ class MainMenu():
         except socket.error:
             s.close()
             self.fronted.tts.speak_text("No internet connection found")
-

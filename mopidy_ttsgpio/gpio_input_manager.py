@@ -1,6 +1,7 @@
-import RPi.GPIO as GPIO
 import logging
 import time
+
+import RPi.GPIO as GPIO
 
 logger = logging.getLogger(__name__)
 longpress_time = 0.3
