@@ -1,5 +1,6 @@
-from Tkinter import DISABLED, Button, Checkbutton, Tk
+from Tkinter import Button, Checkbutton, DISABLED, Tk
 from threading import Thread
+
 
 class GpioSimulator():
     def __init__(self, frontend):
