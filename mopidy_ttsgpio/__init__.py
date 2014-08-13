@@ -29,9 +29,7 @@ class Extension(ext.Extension):
 
     def get_config_schema(self):
         schema = super(Extension, self).get_config_schema()
-        # TODO: Comment in and edit, or remove entirely
-        #schema['username'] = config.String()
-        #schema['password'] = config.Secret()
+        schema['debug_gpio_simulate'] = config.Boolean()
         return schema
 
     def setup(self, registry):

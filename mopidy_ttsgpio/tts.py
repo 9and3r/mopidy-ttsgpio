@@ -1,10 +1,6 @@
-import urllib
-import pygst
 import gst
-import pykka
-import logging
+import urllib
 
-logger = logging.getLogger(__name__)
 
 class TTS():
 

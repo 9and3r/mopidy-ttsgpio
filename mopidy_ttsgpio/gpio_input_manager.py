@@ -1,92 +1,92 @@
 import RPi.GPIO as GPIO
 import logging
+import time
 
 logger = logging.getLogger(__name__)
-
+longpress_time = 0.3
 
 class GPIOManager():
-    def __init__(self, pins):
+
+    def __init__(self, frontend, pins):
+
+        self.frontend = frontend
+
+        # Variables to control if it is a longpress
+        self.down_time_previous = 0
+        self.down_time_next = 0
+        self.down_time_main = 0
+        self.down_time_vol_up = 0
+        self.down_time_vol_down = 0
+
+        # GPIO Mode
         GPIO.setmode(GPIO.BCM)
 
         # Next Button
-        GPIO.setup(pins['nex'], GPIO.IN, pull_up_down=GPIO.PUD_UP)
-        GPIO.add_event_detect(pins['next'], GPIO.BOTH, callback=left,
+        GPIO.setup(pins['next'], GPIO.IN, pull_up_down=GPIO.PUD_UP)
+        GPIO.add_event_detect(pins['next'], GPIO.BOTH, callback=self.next,
                               bouncetime=30)
 
         # Previous Button
         GPIO.setup(pins['previous'], GPIO.IN, pull_up_down=GPIO.PUD_UP)
-        GPIO.add_event_detect(pins['previous'], GPIO.BOTH, callback=right,
-                              bouncetime=30)
+        GPIO.add_event_detect(pins['previous'], GPIO.BOTH,
+                              callback=self.previous, bouncetime=30)
 
         # Volume Up Button
-        GPIO.setup(pins['up'], GPIO.IN, pull_up_down=GPIO.PUD_UP)
-        GPIO.add_event_detect(pins['up'], GPIO.BOTH, callback=up,
+        GPIO.setup(pins['vol_up'], GPIO.IN, pull_up_down=GPIO.PUD_UP)
+        GPIO.add_event_detect(pins['vol_up'], GPIO.BOTH, callback=self.vol_up,
                               bouncetime=30)
 
         # Volume Down Button
-        GPIO.setup(pins['down'], GPIO.IN, pull_up_down=GPIO.PUD_UP)
-        GPIO.add_event_detect(pins['down'], GPIO.BOTH, callback=right,
-                              bouncetime=30)
+        GPIO.setup(pins['vol_down'], GPIO.IN, pull_up_down=GPIO.PUD_UP)
+        GPIO.add_event_detect(pins['vol_down'], GPIO.BOTH,
+                              callback=self.vol_down, bouncetime=30)
 
         # Main Button
         GPIO.setup(pins['main'], GPIO.IN, pull_up_down=GPIO.PUD_UP)
-        GPIO.add_event_detect(pins['man'], GPIO.BOTH, callback=right,
-                              bouncetime=30)
+        GPIO.add_event_detect(pins['main'], GPIO.BOTH,
+                              callback=self.main, bouncetime=30)
 
+    def previous(self, channel):
+        if GPIO.input(channel) == 1:
+            if self.down_time_previous + longpress_time > time.time():
+                self.frontend.input({'key': 'previous', 'long': False})
+            else:
+                self.frontend.input({'key': 'previous', 'long': True})
+        else:
+            self.down_time_previous = time.time()
 
-def right(channel):
-    dict = {}
-    if GPIO.input(channel) == 1:
-        type = pygame.KEYUP
-    else:
-        type = pygame.KEYDOWN
-    dict['key'] = pygame.K_RIGHT
-    event = pygame.event.Event(type, dict)
-    pygame.event.post(event)
+    def next(self, channel):
+        if GPIO.input(channel) == 1:
+            if self.down_time_next + longpress_time > time.time():
+                self.frontend.input({'key': 'next', 'long': False})
+            else:
+                self.frontend.input({'key': 'next', 'long': True})
+        else:
+            self.down_time_next = time.time()
 
+    def main(self, channel):
+        if GPIO.input(channel) == 1:
+            if self.down_time_main + longpress_time > time.time():
+                self.frontend.input({'key': 'main', 'long': False})
+            else:
+                self.frontend.input({'key': 'main', 'long': True})
+        else:
+            self.down_time_main = time.time()
 
-def left(channel):
-    dict = {}
-    if GPIO.input(channel) == 1:
-        type = pygame.KEYUP
-    else:
-        type = pygame.KEYDOWN
-    dict['key'] = pygame.K_RIGHT
-    event = pygame.event.Event(type, dict)
-    pygame.event.post(event)
+    def vol_up(self, channel):
+        if GPIO.input(channel) == 1:
+            if self.down_time_vol_up + longpress_time > time.time():
+                self.frontend.input({'key': 'vol_up', 'long': False})
+            else:
+                self.frontend.input({'key': 'vol_up', 'long': True})
+        else:
+            self.down_time_vol_up = time.time()
 
-
-def down(channel):
-    dict = {}
-    if GPIO.input(channel) == 1:
-        type = pygame.KEYUP
-    else:
-        type = pygame.KEYDOWN
-    dict['key'] = pygame.K_DOWN
-    event = pygame.event.Event(type, dict)
-    pygame.event.post(event)
-
-
-def up(channel):
-    dict = {}
-    if GPIO.input(channel) == 1:
-        type = pygame.KEYUP
-    else:
-        type = pygame.KEYDOWN
-    dict['key'] = pygame.K_UP
-    event = pygame.event.Event(type, dict)
-    pygame.event.post(event)
-
-
-def enter(channel):
-    dict = {}
-    if GPIO.input(channel) == 1:
-        type = pygame.KEYUP
-    else:
-        type = pygame.KEYDOWN
-    dict['key'] = pygame.K_RETURN
-    event = pygame.event.Event(type, dict)
-    pygame.event.post(event)
-
-
-
+    def vol_down(self, channel):
+        if GPIO.input(channel) == 1:
+            if self.down_time_vol_down + longpress_time > time.time():
+                self.frontend.input({'key': 'vol_down', 'long': False})
+            else:
+                self.frontend.input({'key': 'vol_down', 'long': True})
+        else:
+            self.down_time_vol_down = time.time()

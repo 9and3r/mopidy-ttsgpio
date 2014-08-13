@@ -3,14 +3,16 @@ import pykka
 import traceback
 from mopidy import core
 import mopidy
-from .tts import TTS
+
 from .main_menu import MainMenu
+from .tts import TTS
 
 
 logger = logging.getLogger(__name__)
 
 
 class TtsGpio(pykka.ThreadingActor, core.CoreListener):
+
     def __init__(self, config, core):
         super(TtsGpio, self).__init__()
         self.tts = TTS()
@@ -20,18 +22,23 @@ class TtsGpio(pykka.ThreadingActor, core.CoreListener):
         self.core = core
         self.main_menu = MainMenu(self)
 
-        # Used to simulate GPIO inputs
-        from .gpio_simulator import GpioSimulator
-        self.simulator = GpioSimulator(self)
+        self.debug_gpio_simulate = config['ttsgpio']['debug_gpio_simulate']
+        if self.debug_gpio_simulate:
+            from .gpio_simulator import GpioSimulator
+            self.simulator = GpioSimulator(self)
+        else:
+            from .gpio_input_manager import GPIOManager
+            self.gpio_manager = GPIOManager(self, config['pins'])
 
     def track_playback_started(self, tl_track):
         self.speak_current_song(tl_track)
 
     def playback_state_changed(self, old_state, new_state):
-        if new_state == mopidy.core.PlaybackState.PLAYING:
-            self.simulator.playing_led.select()
-        else:
-            self.simulator.playing_led.deselect()
+        if self.debug_gpio_simulate:
+            if new_state == mopidy.core.PlaybackState.PLAYING:
+                self.simulator.playing_led.select()
+            else:
+                self.simulator.playing_led.deselect()
 
     def input(self, input_event):
         try:
