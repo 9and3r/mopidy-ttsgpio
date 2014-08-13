@@ -2,6 +2,7 @@ import logging
 import traceback
 
 from mopidy import core
+
 import pykka
 
 from .main_menu import MainMenu

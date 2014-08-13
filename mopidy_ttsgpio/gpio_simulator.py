@@ -1,5 +1,5 @@
 from threading import Thread
-from Tkinter import *
+from Tkinter import Button, Checkbutton, Tk, E, DISABLED, N, S, W
 
 
 class GpioSimulator():

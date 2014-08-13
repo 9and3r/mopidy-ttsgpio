@@ -2,6 +2,7 @@ from __future__ import unicode_literals
 
 import logging
 import os
+
 from mopidy import config, ext
 
 import pygst
