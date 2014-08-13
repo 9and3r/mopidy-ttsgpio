@@ -11,4 +11,9 @@ class TtsGpioBackend(pykka.ThreadingActor, backend.Backend):
     def on_receive(self, message):
         action = message['action']
         if action == 'set_volume':
-            self.audio.set_volume(message['value'])
+            value = message['value']
+            if value < 0:
+                value = 0
+            elif value > 100:
+                value = 100
+            self.audio.set_volume(value)
