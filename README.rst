@@ -43,6 +43,8 @@ Features
 Installation
 ============
 
+To use this extension you need an internet conection for the tts.
+
 Not released. You can check the development (unstable)::
 
     git clone https://github.com/9and3r/mopidy-ttsgpio/
