@@ -2,7 +2,7 @@ import urllib
 
 import gst
 
-music_level = 50
+music_level = 30
 
 
 class TTS():
@@ -35,7 +35,7 @@ class TTS():
         music_stream_uri = 'http://translate.google.com/translate_tts?' \
                            + urllib.urlencode(params)
         self.player.set_property('uri', music_stream_uri)
-        self.player.set_property('volume', 2)
+        self.player.set_property('volume', 3)
         self.player.set_state(gst.STATE_PLAYING)
 
         bus = self.player.get_bus()

@@ -103,3 +103,4 @@ class TtsGpio(pykka.ThreadingActor, core.CoreListener):
 
     def playlists_loaded(self):
         self.main_menu.elements[0].reload_playlists()
+        self.tts.speak_text("Playlists loaded")
