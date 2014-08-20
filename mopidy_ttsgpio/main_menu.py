@@ -13,7 +13,7 @@ class MainMenu():
         self.main_menu = False
         self.elements = [PlaylistMenu(frontend), 'exit mopidy']
         self.elements.append('shutdown')
-        self.elements.append('reset')
+        self.elements.append('reboot')
         self.elements.append('check ip')
 
     def reset(self):
@@ -41,7 +41,7 @@ class MainMenu():
             mopidy.utils.process.exit_process()
         elif item == 'shutdown':
             os.system("shutdown now -h")
-        elif item == 'reset':
+        elif item == 'reboot':
             os.system("shutdown -r now")
         elif item == 'check ip':
             self.check_ip()
