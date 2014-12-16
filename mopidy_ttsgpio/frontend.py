@@ -38,7 +38,10 @@ class TtsGpio(pykka.ThreadingActor, core.CoreListener):
             else:
                 self.simulator.playing_led.deselect()
         else:
-            self.gpio_manager.set_led(new_state)
+            if new_state == core.PlaybackState.PLAYING:
+                self.gpio_manager.set_led(True)
+            else:
+                self.gpio_manager.set_led(False)
 
     def input(self, input_event):
         try:
