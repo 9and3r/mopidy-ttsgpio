@@ -1,9 +1,7 @@
 from __future__ import unicode_literals
 
-import mock
 import unittest
 
-from mopidy_ttsgpio import frontend
 from mopidy_ttsgpio import Extension
 
 

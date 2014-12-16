@@ -18,12 +18,10 @@ class TTS():
             self.volume_restored = False
             self.last_volume = self.frontend.core.playback.volume.get()
             if self.last_volume > music_level:
-                self.frontend.backend.tell({'action': 'set_volume',
-                                            'value': music_level})
+                self.frontend.core.playback.volume = music_level
 
     def set_last_volume(self):
-        self.frontend.backend.tell({'action': 'set_volume',
-                                    'value': self.last_volume})
+        self.frontend.core.playback.volume = self.last_volume
         self.volume_restored = True
 
     def speak_text(self, text):

@@ -33,12 +33,10 @@ class Extension(ext.Extension):
         schema['pin_button_previous'] = config.Integer()
         schema['pin_button_vol_up'] = config.Integer()
         schema['pin_button_vol_down'] = config.Integer()
+        schema['pin_play_led'] = config.Integer()
         return schema
 
     def setup(self, registry):
 
         from .frontend import TtsGpio
         registry.add('frontend', TtsGpio)
-
-        from .tts_gpio_backend import TtsGpioBackend
-        registry.add('backend', TtsGpioBackend)

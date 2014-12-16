@@ -17,8 +17,6 @@ class TtsGpio(pykka.ThreadingActor, core.CoreListener):
         super(TtsGpio, self).__init__()
         self.tts = TTS(self)
         self.menu = False
-        self.backend = \
-            pykka.ActorRegistry.get_by_class_name("TtsGpioBackend")[0]
         self.core = core
         self.main_menu = MainMenu(self)
 
@@ -39,6 +37,8 @@ class TtsGpio(pykka.ThreadingActor, core.CoreListener):
                 self.simulator.playing_led.select()
             else:
                 self.simulator.playing_led.deselect()
+        else:
+            self.gpio_manager.set_led(new_state)
 
     def input(self, input_event):
         try:
@@ -48,15 +48,14 @@ class TtsGpio(pykka.ThreadingActor, core.CoreListener):
                 else:
                     current = self.core.playback.volume.get()
                     current += 10
-                    self.backend.tell({'action': 'set_volume',
-                                       'value': current})
+                    self.core.playback.volume = current
             elif input_event['key'] == 'volume_down':
                 if input_event['long']:
                     current = 0
                 else:
                     current = self.core.playback.volume.get()
                     current -= 10
-                self.backend.tell({'action': 'set_volume', 'value': current})
+                self.core.playback.volume = current
             elif input_event['key'] == 'main' and input_event['long'] \
                     and self.menu:
                 self.exit_menu()

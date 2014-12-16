@@ -20,6 +20,9 @@ class GPIOManager():
         self.down_time_vol_up = 0
         self.down_time_vol_down = 0
 
+
+        self.led_pin = pins['pin_play_led']
+
         # GPIO Mode
         GPIO.setmode(GPIO.BCM)
 
@@ -50,6 +53,12 @@ class GPIOManager():
         GPIO.setup(pins['pin_button_main'], GPIO.IN, pull_up_down=GPIO.PUD_UP)
         GPIO.add_event_detect(pins['pin_button_main'], GPIO.BOTH,
                               callback=self.main, bouncetime=30)
+
+        #Play Led
+        GPIO.setup(self.led_pin, GPIO.OUT)
+
+    def set_led(self, led_state):
+        GPIO.output(self.led_pin, led_state)
 
     def previous(self, channel):
         if GPIO.input(channel) == 1:
