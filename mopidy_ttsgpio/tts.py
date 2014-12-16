@@ -33,7 +33,7 @@ class TTS():
         music_stream_uri = 'http://translate.google.com/translate_tts?' \
                            + urllib.urlencode(params)
         self.player.set_property('uri', music_stream_uri)
-        self.player.set_property('volume', 3)
+        self.player.set_property('volume', 1.5)
         self.player.set_state(gst.STATE_PLAYING)
 
         bus = self.player.get_bus()
