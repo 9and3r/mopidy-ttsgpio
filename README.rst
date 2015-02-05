@@ -98,6 +98,11 @@ Project resources
 Changelog
 =========
 
+v1.0.1
+----------------------------------------
+
+- GPIO will be disabled if not enough permission
+
 v1.0.0
 ----------------------------------------
 

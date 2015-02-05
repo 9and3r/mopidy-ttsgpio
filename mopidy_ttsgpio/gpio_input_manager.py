@@ -56,7 +56,7 @@ class GPIOManager():
             GPIO.add_event_detect(pins['pin_button_main'], GPIO.BOTH,
                               callback=self.main, bouncetime=30)
         except RuntimeError:
-	    logger.error("Not enough permision")
+	    logger.error("TTSGPIO: Not enough permission to use GPIO. GPIO input will not work")
 
     def set_led(self, led_state):
         GPIO.output(self.led_pin, led_state)
