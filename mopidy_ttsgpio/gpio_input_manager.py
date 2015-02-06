@@ -23,37 +23,40 @@ class GPIOManager():
         # Play Led
         self.led_pin = pins['pin_play_led']
 
-        # GPIO Mode
-        GPIO.setmode(GPIO.BCM)
-        GPIO.setup(self.led_pin, GPIO.OUT)
+        try:
+            # GPIO Mode
+            GPIO.setmode(GPIO.BCM)
+            GPIO.setup(self.led_pin, GPIO.OUT)
 
-        # Next Button
-        GPIO.setup(pins['pin_button_next'], GPIO.IN, pull_up_down=GPIO.PUD_UP)
-        GPIO.add_event_detect(pins['pin_button_next'],
+            # Next Button
+            GPIO.setup(pins['pin_button_next'], GPIO.IN, pull_up_down=GPIO.PUD_UP)
+            GPIO.add_event_detect(pins['pin_button_next'],
                               GPIO.BOTH, callback=self.next, bouncetime=30)
 
         # Previous Button
-        GPIO.setup(pins['pin_button_previous'], GPIO.IN,
+            GPIO.setup(pins['pin_button_previous'], GPIO.IN,
                    pull_up_down=GPIO.PUD_UP)
-        GPIO.add_event_detect(pins['pin_button_previous'], GPIO.BOTH,
+            GPIO.add_event_detect(pins['pin_button_previous'], GPIO.BOTH,
                               callback=self.previous, bouncetime=30)
 
         # Volume Up Button
-        GPIO.setup(pins['pin_button_vol_up'], GPIO.IN,
+            GPIO.setup(pins['pin_button_vol_up'], GPIO.IN,
                    pull_up_down=GPIO.PUD_UP)
-        GPIO.add_event_detect(pins['pin_button_vol_up'], GPIO.BOTH,
+            GPIO.add_event_detect(pins['pin_button_vol_up'], GPIO.BOTH,
                               callback=self.vol_up, bouncetime=30)
 
         # Volume Down Button
-        GPIO.setup(pins['pin_button_vol_down'], GPIO.IN,
+            GPIO.setup(pins['pin_button_vol_down'], GPIO.IN,
                    pull_up_down=GPIO.PUD_UP)
-        GPIO.add_event_detect(pins['pin_button_vol_down'], GPIO.BOTH,
+            GPIO.add_event_detect(pins['pin_button_vol_down'], GPIO.BOTH,
                               callback=self.vol_down, bouncetime=30)
 
         # Main Button
-        GPIO.setup(pins['pin_button_main'], GPIO.IN, pull_up_down=GPIO.PUD_UP)
-        GPIO.add_event_detect(pins['pin_button_main'], GPIO.BOTH,
+            GPIO.setup(pins['pin_button_main'], GPIO.IN, pull_up_down=GPIO.PUD_UP)
+            GPIO.add_event_detect(pins['pin_button_main'], GPIO.BOTH,
                               callback=self.main, bouncetime=30)
+        except RuntimeError:
+	    logger.error("Not enough permision")
 
     def set_led(self, led_state):
         GPIO.output(self.led_pin, led_state)
