@@ -31,7 +31,7 @@ The idea is to develop with GPIO buttons something similar to `3rd generation Ip
 Features
 ========
 
-- Play/Pasue
+- Play/Pause
 - Next/Previous track
 - Select playlist
 - Hear the song name (Text To Speech)
