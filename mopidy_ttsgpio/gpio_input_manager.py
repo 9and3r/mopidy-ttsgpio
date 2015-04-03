@@ -31,13 +31,14 @@ class GPIOManager():
             GPIO.setup(self.led_pin, GPIO.OUT)
 
             # Next Button
-            GPIO.setup(pins['pin_button_next'], GPIO.IN, pull_up_down=GPIO.PUD_UP)
+            GPIO.setup(pins['pin_button_next'], GPIO.IN,
+                       pull_up_down=GPIO.PUD_UP)
             GPIO.add_event_detect(pins['pin_button_next'],
                                   GPIO.BOTH, callback=self.next, bouncetime=30)
 
             # Previous Button
             GPIO.setup(pins['pin_button_previous'], GPIO.IN,
-                   pull_up_down=GPIO.PUD_UP)
+                       pull_up_down=GPIO.PUD_UP)
             GPIO.add_event_detect(pins['pin_button_previous'], GPIO.BOTH,
                                   callback=self.previous, bouncetime=30)
 
@@ -49,19 +50,22 @@ class GPIOManager():
 
             # Volume Down Button
             GPIO.setup(pins['pin_button_vol_down'], GPIO.IN,
-                   pull_up_down=GPIO.PUD_UP)
+                       pull_up_down=GPIO.PUD_UP)
             GPIO.add_event_detect(pins['pin_button_vol_down'],
-                                  GPIO.BOTH, callback=self.vol_down, bouncetime=30)
+                                  GPIO.BOTH, callback=self.vol_down,
+                                  bouncetime=30)
 
             # Main Button
-            GPIO.setup(pins['pin_button_main'], GPIO.IN, pull_up_down=GPIO.PUD_UP)
+            GPIO.setup(pins['pin_button_main'], GPIO.IN,
+                       pull_up_down=GPIO.PUD_UP)
             GPIO.add_event_detect(pins['pin_button_main'],
-                                  GPIO.BOTH,callback=self.main, bouncetime=30)
+                                  GPIO.BOTH, callback=self.main, bouncetime=30)
 
             self.correctlyLoaded = True
 
         except RuntimeError:
-            logger.error("TTSGPIO: Not enough permission to use GPIO. GPIO input will not work")
+            logger.error("TTSGPIO: Not enough permission " +
+                         "to use GPIO. GPIO input will not work")
 
     def set_led(self, led_state):
         if self.correctlyLoaded:

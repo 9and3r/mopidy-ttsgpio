@@ -3,8 +3,9 @@ import socket
 
 import mopidy
 
-from .playlist_menu import PlaylistMenu
 from .on_off_configuration import OnOffConfiguration
+from .playlist_menu import PlaylistMenu
+
 
 class MainMenu():
     def __init__(self, frontend):

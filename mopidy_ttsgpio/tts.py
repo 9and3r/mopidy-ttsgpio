@@ -11,7 +11,7 @@ class TTS():
         self.frontend = frontend
         self.player = gst.element_factory_make("playbin", "tts")
         output = gst.parse_bin_from_description(config['audio']['output'],
-                                                                     ghost_unconnected_pads=True)
+                                                ghost_unconnected_pads=True)
         self.player.set_property('audio-sink', output)
 
     def speak_text(self, text):
@@ -29,5 +29,3 @@ class TTS():
         bus.enable_sync_message_emission()
         bus.add_signal_watch()
         # bus.connect('message::eos', self.end_of_stream)
-
-
