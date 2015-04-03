@@ -4,7 +4,7 @@ import socket
 import mopidy
 
 from .playlist_menu import PlaylistMenu
-
+from .on_off_configuration import OnOffConfiguration
 
 class MainMenu():
     def __init__(self, frontend):
@@ -12,6 +12,7 @@ class MainMenu():
         self.fronted = frontend
         self.main_menu = False
         self.elements = [PlaylistMenu(frontend), 'exit mopidy']
+        self.elements.append(OnOffConfiguration('random'))
         self.elements.append('shutdown')
         self.elements.append('reboot')
         self.elements.append('check ip')

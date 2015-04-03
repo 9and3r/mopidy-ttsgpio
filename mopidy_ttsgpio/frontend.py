@@ -15,7 +15,7 @@ class TtsGpio(pykka.ThreadingActor, core.CoreListener):
 
     def __init__(self, config, core):
         super(TtsGpio, self).__init__()
-        self.tts = TTS(self)
+        self.tts = TTS(self, config)
         self.menu = False
         self.core = core
         self.main_menu = MainMenu(self)
