@@ -12,11 +12,12 @@ class TTS():
         self.player = gst.element_factory_make("playbin", "tts")
         output = gst.parse_bin_from_description(config['audio']['output'],
                                                 ghost_unconnected_pads=True)
+        volume = config['ttsgpio']['tts_default_volume']
+        self.player.set_property('volume', volume)
         self.player.set_property('audio-sink', output)
 
     def speak_text(self, text):
         self.player.set_state(gst.STATE_NULL)
-        self.player.set_property('volume', 2)
         params = {}
         params['tl'] = 'en'
         params['q'] = text.encode('ascii', 'ignore')

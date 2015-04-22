@@ -34,6 +34,7 @@ class Extension(ext.Extension):
         schema['pin_button_vol_up'] = config.Integer()
         schema['pin_button_vol_down'] = config.Integer()
         schema['pin_play_led'] = config.Integer()
+        schema['tts_default_volume'] = config.Integer()
         return schema
 
     def setup(self, registry):
