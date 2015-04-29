@@ -18,7 +18,7 @@ Mopidy-TtsGpio
    :target: https://coveralls.io/r/9and3r/mopidy-ttsgpio?branch=master
    :alt: Test coverage
 
-Controll mopidy without screen using GPIO and TTS
+Control mopidy without screen using GPIO and TTS
 
 For example if you play "Rather Be - Clean Bandit" you will hear:
 
