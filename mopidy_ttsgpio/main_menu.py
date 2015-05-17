@@ -1,8 +1,6 @@
 import os
 import socket
 
-import mopidy
-
 from .on_off_configuration import OnOffConfiguration
 from .playlist_menu import PlaylistMenu
 
@@ -40,7 +38,7 @@ class MainMenu():
 
     def item_selected(self, item):
         if item == 'exit mopidy':
-            mopidy.utils.process.exit_process()
+            os.system("pkill mopidy")
         elif item == 'shutdown':
             os.system("shutdown now -h")
         elif item == 'reboot':
