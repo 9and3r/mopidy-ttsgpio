@@ -16,11 +16,11 @@ class GPIOManager():
         self.correctlyLoaded = False
 
         # Variables to control if it is a longpress
-        self.down_time_previous = 0
-        self.down_time_next = 0
-        self.down_time_main = 0
-        self.down_time_vol_up = 0
-        self.down_time_vol_down = 0
+        self.down_time_previous = -1
+        self.down_time_next = -1
+        self.down_time_main = -1
+        self.down_time_vol_up = -1
+        self.down_time_vol_down = -1
 
         # Play Led
         self.led_pin = pins['pin_play_led']
@@ -73,45 +73,55 @@ class GPIOManager():
 
     def previous(self, channel):
         if GPIO.input(channel) == 1:
-            if self.down_time_previous + longpress_time > time.time():
-                self.frontend.input({'key': 'previous', 'long': False})
-            else:
-                self.frontend.input({'key': 'previous', 'long': True})
+            if self.down_time_previous >= 0:
+                if self.down_time_previous + longpress_time > time.time():
+                    self.frontend.input({'key': 'previous', 'long': False})
+                else:
+                    self.frontend.input({'key': 'previous', 'long': True})
+            self.down_time_previous = -1
         else:
             self.down_time_previous = time.time()
 
     def next(self, channel):
         if GPIO.input(channel) == 1:
-            if self.down_time_next + longpress_time > time.time():
-                self.frontend.input({'key': 'next', 'long': False})
-            else:
-                self.frontend.input({'key': 'next', 'long': True})
+            if self.down_time_next >= 0:
+                if self.down_time_next + longpress_time > time.time():
+                    self.frontend.input({'key': 'next', 'long': False})
+                else:
+                    self.frontend.input({'key': 'next', 'long': True})
+            self.down_time_next = -1
         else:
             self.down_time_next = time.time()
 
     def main(self, channel):
         if GPIO.input(channel) == 1:
-            if self.down_time_main + longpress_time > time.time():
-                self.frontend.input({'key': 'main', 'long': False})
-            else:
-                self.frontend.input({'key': 'main', 'long': True})
+            if self.down_time_main >= 0:
+                if self.down_time_main + longpress_time > time.time():
+                    self.frontend.input({'key': 'main', 'long': False})
+                else:
+                    self.frontend.input({'key': 'main', 'long': True})
+            self.down_time_main = -1
         else:
             self.down_time_main = time.time()
 
     def vol_up(self, channel):
         if GPIO.input(channel) == 1:
-            if self.down_time_vol_up + longpress_time > time.time():
-                self.frontend.input({'key': 'volume_up', 'long': False})
-            else:
-                self.frontend.input({'key': 'volume_up', 'long': True})
+            if self.down_time_vol_up >= 0:
+                if self.down_time_vol_up + longpress_time > time.time():
+                    self.frontend.input({'key': 'volume_up', 'long': False})
+                else:
+                    self.frontend.input({'key': 'volume_up', 'long': True})
+            self.down_time_vol_up = -1
         else:
             self.down_time_vol_up = time.time()
 
     def vol_down(self, channel):
         if GPIO.input(channel) == 1:
-            if self.down_time_vol_down + longpress_time > time.time():
-                self.frontend.input({'key': 'volume_down', 'long': False})
-            else:
-                self.frontend.input({'key': 'volume_down', 'long': True})
+            if self.down_time_vol_down >= 0:
+                if self.down_time_vol_down + longpress_time > time.time():
+                    self.frontend.input({'key': 'volume_down', 'long': False})
+                else:
+                    self.frontend.input({'key': 'volume_down', 'long': True})
+            self.down_time_vol_down = -1
         else:
             self.down_time_vol_down = time.time()
