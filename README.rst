@@ -24,7 +24,10 @@ For example if you play "Rather Be - Clean Bandit" you will hear:
 
 http://translate.google.com/translate_tts?tl=en&q=rather%20be%20by%20clean%20bandit
 
-~~TTS (Text To Speech) is used from google translate (It is not documented but it works).~~
+TTS changed to `Festival <http://www.cstr.ed.ac.uk/projects/festival/>`_. Install it before using TTSGPIO::
+
+    sudo apt-get install festival
+
 
 The idea is to develop with GPIO buttons something similar to `3rd generation Ipod shuffle control <http://youtu.be/TfZUcL700wQ?t=2m40s>`_
 
@@ -99,6 +102,12 @@ Project resources
 
 Changelog
 =========
+
+v1.0.2
+----------------------------------------
+
+- TTS changed to `Festival <http://www.cstr.ed.ac.uk/projects/festival/>`_
+- Remove unused import
 
 v1.0.1
 ----------------------------------------
