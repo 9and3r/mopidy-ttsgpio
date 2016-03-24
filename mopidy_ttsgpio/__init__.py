@@ -5,8 +5,6 @@ import os
 
 from mopidy import config, ext
 
-import pygst
-pygst.require('0.10')
 
 
 __version__ = '1.0.1'
