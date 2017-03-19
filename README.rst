@@ -73,7 +73,7 @@ Mopidy-TtsGpio to your Mopidy configuration file::
     pin_button_previous = 23
     pin_button_vol_up = 24
     pin_button_vol_down = 25
-    pin_play_led = 18
+    pin_play_led = 27
     
 You can set the pins you would like to use. The numbers are in BCM mode. You can check `here <http://raspberrypi.stackexchange.com/a/12967>`_ to see the numbers for your board.
 The buttons must be connected to GROUND.
